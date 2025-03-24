@@ -364,38 +364,64 @@ function printLocalStorage() {
     }
 }
 
-// Přidání event listeneru na chybu přehrávače
+//logování chyb přehrávače
+// const audioEvents = [
+//     'loadstart',
+//     'loadedmetadata',
+//     'loadeddata',
+//     'canplay',
+//     'canplaythrough',
+//     'play',
+//     'playing',
+//     'pause',
+//     'waiting',
+//     'seeking',
+//     'seeked',
+//     'ended',
+//     'error',
+//     //'timeupdate',
+//     'stalled',
+//     'suspend',
+//     'volumechange',
+//     'ratechange',
+//     'durationchange'
+//   ];
+  
+//   audioEvents.forEach(eventName => {
+//     audioPlayer.addEventListener(eventName, event => {
+//       console.log(`Událost "${eventName}" byla spuštěna:`, event);
+//     });
+//   });
+
+  
+
+function handleError(event) {
+    console.error('Došlo k chybě:', event);
+    alert('Nastala chyba při přehrávání. Zkuste to znovu.');
+    // Další kroky, např. přepnout na záložní zdroj
+}
+
+audioPlayer.addEventListener('error', handleError);
+
 audioPlayer.addEventListener('error', () => {
-    console.error('Chyba při přehrávání, pokus o opětovné přehrání...');
+    console.warn('Chyba zjištěna, pokus o zotavení...');
     setTimeout(() => {
-        audioPlayer.src = '';  // Resetuje zdroj
-        audioPlayer.src = lastStationUrl;  // Nastaví zdroj zpět na poslední URL
-        audioPlayer.play().catch(error => {
-            console.error('Opětovné přehrání selhalo:', error);
-        });
-    }, 1000);  // Zpoždění 1 sekundy před opětovným pokusem
+        audioPlayer.src = ''; // Reset zdroje
+        audioPlayer.src = lastStationUrl; // Obnovení původního zdroje
+        audioPlayer.play().catch(err => console.error('Obnova selhala:', err));
+    }, 1000); // Počkejte 1 sekundu
 });
 
-// Přidání event listeneru na chybu přehrávače
-audioPlayer.addEventListener('stalled', () => {
-    console.error('Chyba při přehrávání, pokus o opětovné přehrání...');
-    setTimeout(() => {
-        audioPlayer.src = '';  // Resetuje zdroj
-        audioPlayer.src = lastStationUrl;  // Nastaví zdroj zpět na poslední URL
-        audioPlayer.play().catch(error => {
-            console.error('Opětovné přehrání selhalo:', error);
-        });
-    }, 1000);  // Zpoždění 1 sekundy před opětovným pokusem
-});
 
-// Přidání event listeneru na chybu přehrávače
-audioPlayer.addEventListener('ended', () => {
-    console.error('Chyba při přehrávání, pokus o opětovné přehrání...');
-    setTimeout(() => {
-        audioPlayer.src = '';  // Resetuje zdroj
-        audioPlayer.src = lastStationUrl;  // Nastaví zdroj zpět na poslední URL
-        audioPlayer.play().catch(error => {
-            console.error('Opětovné přehrání selhalo:', error);
-        });
-    }, 1000);  // Zpoždění 1 sekundy před opětovným pokusem
-});
+async function isSourceValid(url) {
+    try {
+        const response = await fetch(url, { method: 'HEAD' });
+        return response.ok;
+    } catch (error) {
+        console.error('Kontrola URL selhala:', error);
+        return false;
+    }
+}
+
+
+
