@@ -4,7 +4,7 @@ let lastStationUrl = '';  // Uloží poslední URL přehrávané stanice
 let retryCount = 0;  // Počítadlo pokusů
 const maxRetries = 3;  // Maximální počet pokusů
 
-const url = 'https://at1.api.radio-browser.info/json/stations/search?limit=15&language=czech&hidebroken=true&order=clickcount&reverse=true&is_https=true';
+const url = 'https://de2.api.radio-browser.info/json/stations/search?limit=15&language=czech&hidebroken=true&order=clickcount&reverse=true&is_https=true';
 
 // Načtení uložených oblíbených stanic z cookies
 let favoriteStations = [];
@@ -12,7 +12,7 @@ let currentPlayingButton = null; // Proměnná pro uložení aktuálního tlač�
 
 function hledej() {
     var searchValue = document.getElementById('searchValue').value;
-    const searchStation = 'https://at1.api.radio-browser.info/json/stations/search?hidebroken=true&reverse=true&is_https=true&name='+ encodeURIComponent(searchValue) + '&nameExact=false&limit=15';
+    const searchStation = 'https://de2.api.radio-browser.info/json/stations/search?hidebroken=true&reverse=true&is_https=true&name='+ encodeURIComponent(searchValue) + '&nameExact=false&limit=15';
     console.log(searchValue);
     fetch(searchStation)
         .then(response => response.json())
