@@ -365,33 +365,33 @@ function printLocalStorage() {
 }
 
 //logování chyb přehrávače
-// const audioEvents = [
-//     'loadstart',
-//     'loadedmetadata',
-//     'loadeddata',
-//     'canplay',
-//     'canplaythrough',
-//     'play',
-//     'playing',
-//     'pause',
-//     'waiting',
-//     'seeking',
-//     'seeked',
-//     'ended',
-//     'error',
-//     //'timeupdate',
-//     'stalled',
-//     'suspend',
-//     'volumechange',
-//     'ratechange',
-//     'durationchange'
-//   ];
+const audioEvents = [
+    'loadstart',
+    'loadedmetadata',
+    'loadeddata',
+    'canplay',
+    'canplaythrough',
+    'play',
+    'playing',
+    'pause',
+    'waiting',
+    'seeking',
+    'seeked',
+    'ended',
+    'error',
+    //'timeupdate',
+    'stalled',
+    'suspend',
+//    'volumechange',
+//    'ratechange',
+//    'durationchange'
+  ];
   
-//   audioEvents.forEach(eventName => {
-//     audioPlayer.addEventListener(eventName, event => {
-//       console.log(`Událost "${eventName}" byla spuštěna:`, event);
-//     });
-//   });
+  audioEvents.forEach(eventName => {
+    audioPlayer.addEventListener(eventName, event => {
+      console.log(`Událost "${eventName}" byla spuštěna:`, event);
+    });
+  });
 
   
 
