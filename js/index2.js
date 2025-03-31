@@ -381,7 +381,7 @@ const audioEvents = [
     'error',
     //'timeupdate',
     'stalled',
-    'suspend',
+//    'suspend',
 //    'volumechange',
 //    'ratechange',
 //    'durationchange'
